@@ -45,6 +45,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${inter.variable} ${outfit.variable} ${jetbrainsMono.variable} h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full bg-[#030305] text-[#f5f5f5] selection:bg-indigo-500/30 selection:text-white">
