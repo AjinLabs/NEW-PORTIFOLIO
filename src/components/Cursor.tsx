@@ -3,8 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 export default function Cursor() {
-  const cursorRef = useRef<HTMLDivElement>(null);
-  const riderRef = useRef<SVGSVGElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLDivElement>(null);
   const [isTouch, setIsTouch] = useState(false);
 
@@ -14,158 +14,123 @@ export default function Cursor() {
       return;
     }
 
-    const cursor = cursorRef.current;
-    const rider = riderRef.current;
-    
-    let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-    let pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-    let vel = { x: 0, y: 0 };
-    
+    const dot = dotRef.current;
+    const ring = ringRef.current;
+    const label = labelRef.current;
+
+    const mouse = { x: -100, y: -100 };
+    const pos = { x: -100, y: -100 };
+
     const onMouseMove = (e: MouseEvent) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
-    };
-    
-    window.addEventListener("mousemove", onMouseMove);
-    
-    let isIdle = false;
-    let idleTimeout: NodeJS.Timeout;
-    
-    const render = () => {
-      const dt = 0.15;
-      
-      const dx = mouse.x - pos.x;
-      const dy = mouse.y - pos.y;
-      
-      vel.x = dx;
-      vel.y = dy;
-      
-      pos.x += dx * dt;
-      pos.y += dy * dt;
-      
-      if (cursor) {
-        gsap.set(cursor, { x: pos.x, y: pos.y });
-      }
-      
-      if (rider) {
-        const speed = Math.sqrt(vel.x * vel.x + vel.y * vel.y);
-        if (speed > 0.5) {
-          isIdle = false;
-          const scaleX = vel.x < 0 ? -1 : 1;
-          const rotation = (vel.y / window.innerHeight) * 45 * scaleX; 
-          
-          gsap.to(rider, {
-            scaleX: scaleX,
-            rotation: rotation,
-            duration: 0.3,
-            ease: "power2.out"
-          });
-          
-          gsap.to('.bicycle-wheel', {
-             rotation: "+=" + (speed * 2 * scaleX),
-             duration: 0.1,
-             ease: "none"
-          });
-          
-          gsap.killTweensOf('.rider-body');
-          gsap.set('.rider-body', { y: 0 });
 
-          clearTimeout(idleTimeout);
-          idleTimeout = setTimeout(() => {
-            isIdle = true;
-          }, 100);
-        } else if (isIdle) {
-          gsap.to(rider, {
-            rotation: 0,
-            duration: 0.5,
-            ease: "power2.out"
-          });
-          
-          gsap.to('.rider-body', {
-            y: 1,
-            duration: 1.5,
-            yoyo: true,
-            repeat: -1,
-            ease: "sine.inOut"
-          });
-        }
+      if (dot) {
+        gsap.set(dot, { x: mouse.x, y: mouse.y });
       }
-      
-      requestAnimationFrame(render);
     };
-    
-    requestAnimationFrame(render);
-    
+
+    window.addEventListener("mousemove", onMouseMove);
+
+    // Smooth spring physics for outer ring
+    let animationFrameId: number;
+    const render = () => {
+      const dt = 0.18;
+      pos.x += (mouse.x - pos.x) * dt;
+      pos.y += (mouse.y - pos.y) * dt;
+
+      if (ring) {
+        gsap.set(ring, { x: pos.x, y: pos.y });
+      }
+
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    render();
+
+    // Hover interactions
     const onMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const clickable = target.closest('a') || target.closest('button');
-      if (clickable) {
-        gsap.to(cursorRef.current, { scale: 0.9, duration: 0.3 });
-        if (labelRef.current) {
-          labelRef.current.innerText = clickable.getAttribute('data-cursor-label') || "EXPLORE";
-          gsap.to(labelRef.current, { opacity: 1, y: -10, duration: 0.2 });
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+
+      const interactive = target.closest("a, button, [role='button'], [data-cursor-label]");
+      if (interactive) {
+        const customLabel = interactive.getAttribute("data-cursor-label") || "OPEN";
+        if (ring) {
+          gsap.to(ring, {
+            scale: 2.2,
+            borderColor: "rgba(255, 255, 255, 0.8)",
+            backgroundColor: "rgba(255, 255, 255, 0.08)",
+            duration: 0.25,
+            ease: "power2.out",
+          });
+        }
+        if (dot) {
+          gsap.to(dot, { scale: 0.4, opacity: 0.5, duration: 0.2 });
+        }
+        if (label && customLabel) {
+          label.textContent = customLabel;
+          gsap.to(label, { opacity: 1, y: -26, duration: 0.2 });
         }
       }
     };
-    
-    const onMouseOut = () => {
-       gsap.to(cursorRef.current, { scale: 1, duration: 0.3 });
-       if (labelRef.current) {
-          gsap.to(labelRef.current, { opacity: 0, y: 0, duration: 0.2 });
-       }
+
+    const onMouseOut = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+
+      const interactive = target.closest("a, button, [role='button'], [data-cursor-label]");
+      if (interactive) {
+        if (ring) {
+          gsap.to(ring, {
+            scale: 1,
+            borderColor: "rgba(255, 255, 255, 0.4)",
+            backgroundColor: "transparent",
+            duration: 0.25,
+            ease: "power2.out",
+          });
+        }
+        if (dot) {
+          gsap.to(dot, { scale: 1, opacity: 1, duration: 0.2 });
+        }
+        if (label) {
+          gsap.to(label, { opacity: 0, y: -18, duration: 0.2 });
+        }
+      }
     };
-    
+
     document.addEventListener("mouseover", onMouseOver);
     document.addEventListener("mouseout", onMouseOut);
-    
+
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseover", onMouseOver);
       document.removeEventListener("mouseout", onMouseOut);
-      clearTimeout(idleTimeout);
+      cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
   if (isTouch) return null;
 
   return (
-    <div 
-      ref={cursorRef} 
-      className="fixed top-0 left-0 pointer-events-none z-[9999] flex flex-col items-center justify-center mix-blend-difference"
-      style={{ transform: "translate(-50%, -50%)" }}
-    >
-      <div 
-        ref={labelRef} 
-        className="absolute -top-6 text-[10px] font-bold uppercase tracking-widest opacity-0 whitespace-nowrap text-white"
+    <>
+      {/* Precision center dot */}
+      <div
+        ref={dotRef}
+        className="fixed top-0 left-0 pointer-events-none z-[9999] w-2 h-2 -ml-1 -mt-1 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)] mix-blend-difference"
+      />
+
+      {/* Lagging outer magnetic ring */}
+      <div
+        ref={ringRef}
+        className="fixed top-0 left-0 pointer-events-none z-[9998] w-9 h-9 -ml-[18px] -mt-[18px] rounded-full border border-white/40 transition-colors backdrop-blur-[1px] flex items-center justify-center mix-blend-difference"
       >
+        {/* Floating monospace micro badge */}
+        <span
+          ref={labelRef}
+          className="font-mono text-[9px] uppercase tracking-widest text-white/90 opacity-0 pointer-events-none select-none whitespace-nowrap drop-shadow"
+        />
       </div>
-      
-      <svg 
-        ref={riderRef}
-        width="48" 
-        height="48" 
-        viewBox="0 0 64 64" 
-        fill="none" 
-        xmlns="http://www.w3.org/2000/svg"
-        className="text-white drop-shadow-md"
-      >
-        <circle cx="16" cy="48" r="10" stroke="currentColor" strokeWidth="2" className="bicycle-wheel origin-[16px_48px]" />
-        <circle cx="48" cy="48" r="10" stroke="currentColor" strokeWidth="2" className="bicycle-wheel origin-[48px_48px]" />
-        
-        <path d="M16 48L28 24H42L48 48" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-        <path d="M28 24L12 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        <path d="M42 24L36 48" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-        
-        <path d="M42 24L40 18H46" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M26 24L24 18H30" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        
-        <g className="rider-body">
-          <circle cx="32" cy="10" r="4.5" fill="currentColor" />
-          <path d="M32 14C32 14 36 20 40 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          <path d="M32 14L28 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          <path d="M28 22L36 34" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        </g>
-      </svg>
-    </div>
+    </>
   );
 }

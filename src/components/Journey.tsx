@@ -1,136 +1,131 @@
 "use client";
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Bike } from "lucide-react";
+import React from "react";
+import { GraduationCap, Award, Compass } from "lucide-react";
 
-const timelineEvents = [
+const milestones = [
   {
-    year: "2020",
-    title: "SSLC",
-    org: "VMC GHSS Wandoor",
-    desc: "A+ in all subjects.",
+    period: "2025 → 2026",
+    tag: "PROFESSIONAL SPECIALIZATION",
+    title: "Data Science Trainee",
+    institution: "Techolas Kochi",
+    description:
+      "Advanced hands-on immersion in applied statistical modeling, supervised/unsupervised machine learning, database architectures, and business analytics workflows.",
+    highlight: "ML Pipelines & Big Data Analytics",
   },
   {
-    year: "2022",
-    title: "HIGHER SECONDARY SCIENCE",
-    org: "",
-    desc: "961 / 1200 | B+",
+    period: "2022 → 2025",
+    tag: "UNDERGRADUATE DEGREE",
+    title: "Bachelor of Computer Applications (BCA)",
+    institution: "Christ College Puliyanmala (Mahatma Gandhi University)",
+    description:
+      "Core foundation in computer science, data structures, algorithms, relational database management systems, and software engineering principles.",
+    highlight: "Graduated Grade B+",
   },
   {
-    year: "2024",
-    title: "PYTHON FULL STACK DEVELOPMENT",
-    org: "Byteboot Techno Solutions",
-    desc: "Django Framework | April 2024 → May 2024",
+    period: "2024",
+    tag: "ENGINEERING CERTIFICATION",
+    title: "Python Full Stack Development",
+    institution: "Byteboot Techno Solutions",
+    description:
+      "Focused practical training on full-stack architecture using Python and Django, building REST APIs, managing authentication, and deploying web services.",
+    highlight: "Django Web Systems & REST APIs",
   },
   {
-    year: "2025",
-    title: "BACHELOR OF COMPUTER APPLICATIONS",
-    org: "Christ College Puliyanmala (Mahatma Gandhi University)",
-    desc: "Completed 2025 | Grade B+",
+    period: "2020 → 2022",
+    tag: "ACADEMIC FOUNDATION",
+    title: "Higher Secondary (Science Stream)",
+    institution: "Kerala State Board",
+    description:
+      "Mathematics, Physics, Chemistry, and Computer Science foundation that established strong analytical reasoning.",
+    highlight: "Scored 961 / 1200 · Grade B+",
   },
   {
-    year: "2025 → 2026",
-    title: "DATA SCIENCE TRAINEE",
-    org: "Techolas Kochi",
-    desc: "June 2025 → July 2026",
-  }
+    period: "2020",
+    tag: "ACADEMIC EXCELLENCE",
+    title: "Secondary School Leaving Certificate (SSLC)",
+    institution: "VMC GHSS Wandoor",
+    description:
+      "Distinction in secondary education with highest-tier academic performance across all subjects.",
+    highlight: "A+ in All Subjects (Full A+)",
+  },
 ];
 
 export default function Journey() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const lineRef = useRef<HTMLDivElement>(null);
-  const cyclistRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let ctx = gsap.context(() => {
-      // Draw timeline line
-      gsap.fromTo(lineRef.current, 
-        { scaleY: 0 },
-        {
-          scaleY: 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top center",
-            end: "bottom center",
-            scrub: true,
-            onUpdate: (self) => {
-              // Cyclist direction based on scroll velocity
-              if (cyclistRef.current) {
-                const isScrollingDown = self.direction === 1;
-                gsap.to(cyclistRef.current, {
-                  rotation: isScrollingDown ? 90 : -90,
-                  duration: 0.3
-                });
-                
-                gsap.set(cyclistRef.current, {
-                  top: `${self.progress * 100}%`,
-                  yPercent: -50
-                });
-              }
-            }
-          }
-        }
-      );
-
-      // Event animations
-      const events = gsap.utils.toArray<HTMLElement>('.journey-event');
-      events.forEach((event, i) => {
-        const isLeft = i % 2 === 0;
-        gsap.from(event, {
-          scrollTrigger: {
-            trigger: event,
-            start: "top 80%",
-          },
-          x: isLeft ? -50 : 50,
-          opacity: 0,
-          duration: 1,
-          ease: "power3.out"
-        });
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section id="journey" ref={sectionRef} className="py-32 px-6 md:px-12 lg:px-24 relative overflow-hidden bg-[#050505]">
-      <h2 className="font-display font-bold text-4xl md:text-6xl lg:text-8xl uppercase mb-32 tracking-tighter text-center">
-        MY JOURNEY
-      </h2>
-
-      <div className="relative max-w-5xl mx-auto">
-        {/* The central line */}
-        <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[1px] bg-gray-800 -translate-x-1/2">
-          <div ref={lineRef} className="w-full h-full bg-white origin-top"></div>
-          
-          {/* Timeline Cyclist */}
-          <div 
-            ref={cyclistRef}
-            className="absolute left-1/2 -translate-x-1/2 text-white bg-[#050505] p-2 rotate-90 z-10 rounded-full"
-          >
-             <Bike size={20} />
+    <section id="journey" className="py-28 px-4 sm:px-8 lg:px-16 relative">
+      <div className="max-w-7xl mx-auto flex flex-col gap-14">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-8">
+          <div>
+            <span className="font-mono text-xs uppercase tracking-[0.25em] text-indigo-400 block mb-3">
+              TIMELINE // FOUNDATIONS &amp; TRAJECTORY
+            </span>
+            <h2 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-white">
+              Academic &amp; Career Journey
+            </h2>
           </div>
+          <p className="font-sans text-sm sm:text-base text-zinc-400 max-w-md">
+            From strong foundations in science and computer applications to dedicated specialization in data science and full-stack systems.
+          </p>
         </div>
 
-        <div className="flex flex-col gap-24">
-          {timelineEvents.map((event, i) => {
-            const isLeft = i % 2 === 0;
-            return (
-              <div key={i} className={`journey-event relative flex flex-col md:flex-row ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-8 md:gap-16 pl-12 md:pl-0`}>
-                
-                {/* Content */}
-                <div className={`flex-1 flex flex-col ${isLeft ? 'md:items-end md:text-right' : 'md:items-start md:text-left'}`}>
-                  <div className="font-mono text-xl md:text-2xl text-gray-400 mb-2">{event.year}</div>
-                  <h3 className="font-display font-bold text-2xl md:text-4xl uppercase mb-2 text-white">{event.title}</h3>
-                  {event.org && <div className="text-gray-300 font-sans tracking-widest text-sm mb-4 uppercase">{event.org}</div>}
-                  <p className="text-gray-500 max-w-sm">{event.desc}</p>
+        {/* Milestone Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {milestones.map((m, index) => (
+            <div
+              key={index}
+              data-cursor-label="MILESTONE"
+              className="bg-black/60 backdrop-blur-xl border border-white/10 hover:border-white/20 rounded-2xl p-7 sm:p-8 flex flex-col justify-between gap-6 transition-all duration-300"
+            >
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs text-indigo-400 font-bold tracking-wider">
+                    {m.period}
+                  </span>
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 bg-white/[0.04] px-2 py-1 rounded">
+                    {m.tag}
+                  </span>
                 </div>
-                
+
+                <div>
+                  <h3 className="font-display font-bold text-xl sm:text-2xl text-white">
+                    {m.title}
+                  </h3>
+                  <p className="font-mono text-xs text-zinc-400 mt-1">
+                    {m.institution}
+                  </p>
+                </div>
+
+                <p className="font-sans text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                  {m.description}
+                </p>
               </div>
-            );
-          })}
+
+              <div className="pt-4 border-t border-white/[0.08] flex items-center gap-2 font-mono text-xs text-emerald-400">
+                <Award size={14} className="shrink-0" />
+                <span>{m.highlight}</span>
+              </div>
+            </div>
+          ))}
+
+          {/* Forward Trajectory Card */}
+          <div className="bg-gradient-to-br from-indigo-950/40 via-black to-black border border-indigo-500/30 rounded-2xl p-7 sm:p-8 flex flex-col justify-between gap-6">
+            <div className="flex flex-col gap-4">
+              <span className="font-mono text-xs text-indigo-400 font-bold tracking-wider">
+                LOOKING FORWARD //
+              </span>
+              <h3 className="font-display font-bold text-xl sm:text-2xl text-white">
+                Next Frontier
+              </h3>
+              <p className="font-sans text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                Actively expanding research into Agentic AI orchestration, low-latency edge inference, and enterprise RAG deployments that solve complex operational bottlenecks.
+              </p>
+            </div>
+            <div className="flex items-center gap-2 font-mono text-xs text-indigo-300">
+              <Compass size={14} />
+              <span>Continuously Building &amp; Learning</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>

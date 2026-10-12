@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google";
+import { Inter, Outfit, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Cursor from "@/components/Cursor";
 import SmoothScrolling from "@/components/SmoothScrolling";
@@ -14,9 +14,27 @@ const outfit = Outfit({
   subsets: ["latin"],
 });
 
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
-  title: "AJIN K | Portfolio",
-  description: "Data Scientist, AI/ML Engineer, Full Stack Web Developer. I build intelligent systems, data-driven applications and interactive digital products.",
+  title: "AJIN K | Data Scientist, AI/ML Engineer & Full-Stack Developer",
+  description:
+    "Portfolio of Ajin K — Data Scientist, Applied AI/ML Engineer, and Full-Stack Web Architect. Bridging statistical data analysis, neural architectures, and production-grade software.",
+  keywords: [
+    "Ajin K",
+    "Data Scientist",
+    "Machine Learning Engineer",
+    "AI Engineer",
+    "Full Stack Web Developer",
+    "Python",
+    "Next.js",
+    "PyTorch",
+    "RAG",
+    "Generative AI",
+  ],
 };
 
 export default function RootLayout({
@@ -27,9 +45,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${outfit.variable} h-full antialiased`}
+      className={`${inter.variable} ${outfit.variable} ${jetbrainsMono.variable} h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-full bg-black text-[#f5f5f5]">
+      <body className="min-h-full bg-[#030305] text-[#f5f5f5] selection:bg-indigo-500/30 selection:text-white">
         <SmoothScrolling>
           <Cursor />
           {children}

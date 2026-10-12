@@ -1,142 +1,172 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React, { useState } from "react";
+import { Database, Cpu, Brain, Layers, ArrowUpRight, CheckCircle2 } from "lucide-react";
 
-gsap.registerPlugin(ScrollTrigger);
-
-const services = [
+const capabilities = [
   {
     num: "01",
-    title: "DATA SCIENCE",
-    desc: "Turning raw data into useful insights, predictive models and decision-support systems.",
+    icon: Database,
+    title: "Data Science & Analytical Engineering",
+    tagline: "Statistical analysis, ETL pipelines, and decision intelligence.",
+    description:
+      "Transforming raw, noisy tabular data into actionable statistical insight. I engineer rigorous data pipelines from ingestion to automated cleaning, feature extraction, and executive visualization.",
+    deliverables: [
+      "Exploratory Data Analysis (EDA) & hypothesis testing",
+      "Automated feature engineering & data preprocessing",
+      "Time-series forecasting & trend decomposition",
+      "Interactive Power BI, Tableau & MySQL analytical dashboards",
+    ],
+    tech: ["Python", "Pandas", "NumPy", "SQL", "MySQL", "Power BI", "Tableau", "Excel"],
   },
   {
     num: "02",
-    title: "AI ENGINEERING",
-    desc: "Building AI-powered applications using ML, LLMs, RAG and intelligent workflows.",
+    icon: Cpu,
+    title: "Applied Machine Learning Systems",
+    tagline: "Predictive modeling, classification, and neural pipelines.",
+    description:
+      "Building and evaluating high-precision machine learning models. From tree-based ensembles (Random Forest, XGBoost) to PyTorch deep learning architectures, optimized for low inference latency and high generalization.",
+    deliverables: [
+      "Supervised classification & regression pipelines",
+      "Anomaly detection & customer segmentation clustering",
+      "Hyperparameter optimization & k-fold cross-validation",
+      "Inference acceleration & FastAPI microservice endpoints",
+    ],
+    tech: ["PyTorch", "Scikit-Learn", "FastAPI", "Python", "Algorithms", "Model Registry"],
   },
   {
     num: "03",
-    title: "ANALYTICS",
-    desc: "Interactive dashboards, business intelligence and data-driven reporting.",
+    icon: Brain,
+    title: "Generative AI & Agentic Architectures",
+    tagline: "Production RAG, vector search, and LLM orchestration.",
+    description:
+      "Creating modern AI products powered by large language models. I build hybrid vector retrieval pipelines with dense embeddings, cross-encoder reranking, and autonomous tool-calling agents.",
+    deliverables: [
+      "Retrieval-Augmented Generation (RAG) with vector databases",
+      "Semantic search with hybrid BM25 + dense embeddings",
+      "Tool-calling agents with structured JSON outputs",
+      "Prompt optimization & hallucination mitigation safeguards",
+    ],
+    tech: ["LLMs", "RAG", "LangChain", "Vector DBs", "Embeddings", "Hugging Face"],
   },
   {
     num: "04",
-    title: "FULL STACK",
-    desc: "Building complete web applications from frontend to backend.",
-  },
-  {
-    num: "05",
-    title: "AI PRODUCTS",
-    desc: "Turning ideas into practical intelligent applications.",
+    icon: Layers,
+    title: "Full-Stack Web Engineering",
+    tagline: "High-performance, type-safe web applications.",
+    description:
+      "Engineering resilient web platforms where end-users interact with data and intelligence. Built with modern React and Next.js on the client, backed by Python/Django or Node APIs.",
+    deliverables: [
+      "Next.js 16 App Router with server-side rendering & streaming",
+      "Python / Django full-stack backends with RESTful APIs",
+      "Type-safe TypeScript architectures with Tailwind CSS",
+      "Smooth 60fps micro-animations (GSAP & Framer Motion)",
+    ],
+    tech: ["Next.js", "React 19", "TypeScript", "Django", "Tailwind CSS", "REST APIs"],
   },
 ];
 
 export default function WhatIBuild() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-
-  useEffect(() => {
-    let ctx = gsap.context(() => {
-      // Heading reveal
-      gsap.from(headingRef.current, {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        },
-        y: 100,
-        opacity: 0,
-        duration: 1,
-        ease: "power4.out",
-      });
-
-      // Cards stagger reveal
-      gsap.from(".build-card", {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 60%",
-        },
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power3.out",
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+  const [activeCard, setActiveCard] = useState<number | null>(null);
 
   return (
-    <section id="work" ref={sectionRef} className="py-32 px-6 md:px-12 lg:px-24">
-      <h2 ref={headingRef} className="font-display font-bold text-4xl md:text-6xl lg:text-8xl uppercase mb-16 tracking-tighter">
-        WHAT I BUILD.
-      </h2>
+    <section id="expertise" className="py-28 px-4 sm:px-8 lg:px-16 relative">
+      <div className="max-w-7xl mx-auto flex flex-col gap-14">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-8">
+          <div>
+            <span className="font-mono text-xs uppercase tracking-[0.25em] text-indigo-400 block mb-3">
+              WHAT I DELIVER // CORE COMPETENCIES
+            </span>
+            <h2 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-white">
+              Architectural Expertise
+            </h2>
+          </div>
+          <p className="font-sans text-sm sm:text-base text-zinc-400 max-w-md">
+            Four interconnected disciplines forming a complete cycle: raw data → trained model → intelligent backend → polished web application.
+          </p>
+        </div>
 
-      <div className="flex flex-col gap-4">
-        {services.map((service, index) => {
-          const isActive = activeIndex === index;
-          const isDimmed = activeIndex !== null && activeIndex !== index;
+        {/* Capabilities Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {capabilities.map((cap, index) => {
+            const Icon = cap.icon;
+            const isHovered = activeCard === index;
 
-          return (
-            <div
-              key={service.num}
-              className={`build-card relative group flex flex-col md:flex-row items-start md:items-center justify-between p-8 border transition-all duration-500 cursor-pointer ${
-                isActive ? "border-white bg-[#0a0a0a]" : "border-[#222] hover:border-gray-500"
-              } ${isDimmed ? "opacity-30" : "opacity-100"}`}
-              onMouseEnter={() => setActiveIndex(index)}
-              onMouseLeave={() => setActiveIndex(null)}
-              data-cursor-label="EXPLORE"
-            >
-              <div className="flex items-center gap-8 md:gap-16">
-                <span 
-                  className={`font-mono text-3xl md:text-5xl transition-colors duration-500 ${
-                    isActive ? "text-white" : "text-gray-700"
-                  }`}
-                >
-                  {service.num}
-                </span>
-                <div>
-                  <h3 
-                    className={`font-display font-bold uppercase tracking-widest transition-all duration-500 ${
-                      isActive ? "text-3xl md:text-5xl text-white" : "text-xl md:text-3xl text-gray-400"
-                    }`}
-                  >
-                    {service.title}
-                  </h3>
-                  <div 
-                    className={`grid transition-all duration-500 ease-in-out ${
-                      isActive ? "grid-rows-[1fr] mt-4" : "grid-rows-[0fr] mt-0"
-                    }`}
-                  >
-                    <p className="overflow-hidden font-sans text-gray-400 max-w-xl text-sm md:text-base">
-                      {service.desc}
+            return (
+              <div
+                key={cap.num}
+                onMouseEnter={() => setActiveCard(index)}
+                onMouseLeave={() => setActiveCard(null)}
+                data-cursor-label="EXPAND"
+                className={`group relative p-8 sm:p-10 rounded-2xl border transition-all duration-300 flex flex-col justify-between gap-8 bg-black/60 backdrop-blur-xl ${
+                  isHovered
+                    ? "border-white/40 shadow-2xl shadow-indigo-500/10 bg-zinc-950/80"
+                    : "border-white/10 hover:border-white/20"
+                }`}
+              >
+                {/* Top card info */}
+                <div className="flex flex-col gap-6">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="p-3 rounded-xl bg-white/[0.05] border border-white/10 text-white group-hover:bg-white group-hover:text-black transition-colors duration-300">
+                        <Icon size={22} />
+                      </div>
+                      <span className="font-mono text-xs text-indigo-400 uppercase tracking-widest">
+                        DOM {cap.num}
+                      </span>
+                    </div>
+                    <ArrowUpRight
+                      size={20}
+                      className="text-zinc-500 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-200"
+                    />
+                  </div>
+
+                  <div>
+                    <h3 className="font-display font-bold text-2xl sm:text-3xl text-white group-hover:text-white transition-colors">
+                      {cap.title}
+                    </h3>
+                    <p className="font-mono text-xs text-zinc-400 mt-2 tracking-wide">
+                      {cap.tagline}
+                    </p>
+                    <p className="font-sans text-sm text-zinc-400 leading-relaxed mt-4">
+                      {cap.description}
                     </p>
                   </div>
+
+                  {/* Deliverables checklist */}
+                  <div className="flex flex-col gap-2 pt-4 border-t border-white/[0.06]">
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">
+                      KEY DELIVERABLES:
+                    </span>
+                    <ul className="flex flex-col gap-1.5">
+                      {cap.deliverables.map((item, i) => (
+                        <li
+                          key={i}
+                          className="flex items-start gap-2 font-mono text-xs text-zinc-300 leading-snug"
+                        >
+                          <CheckCircle2 size={13} className="text-emerald-400 shrink-0 mt-0.5" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Tech chips */}
+                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-white/[0.06]">
+                  {cap.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/10 font-mono text-[11px] text-zinc-400 group-hover:text-zinc-200 group-hover:border-white/20 transition-colors"
+                    >
+                      {t}
+                    </span>
+                  ))}
                 </div>
               </div>
-              
-              <div 
-                className={`hidden md:block font-mono text-xs tracking-widest transition-opacity duration-500 ${
-                  isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-                }`}
-              >
-                EXPLORE ↗
-              </div>
-              
-              {/* Huge background number reveal */}
-              <div 
-                className={`absolute right-12 top-1/2 -translate-y-1/2 font-display font-bold text-[150px] leading-none text-[#111] pointer-events-none transition-opacity duration-500 ${
-                  isActive ? "opacity-100" : "opacity-0"
-                }`}
-              >
-                {service.num}
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </section>
   );
