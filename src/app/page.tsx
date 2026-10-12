@@ -1,50 +1,36 @@
 "use client";
-import React, { useState } from "react";
-import Loader from "@/components/Loader";
+import React from "react";
 import Navigation from "@/components/Navigation";
-import NeuralCanvas from "@/components/NeuralCanvas";
 import Hero from "@/components/Hero";
-import WhatIBuild from "@/components/WhatIBuild";
-import SelectedWork from "@/components/SelectedWork";
-import SystemPlayground from "@/components/SystemPlayground";
-import Journey from "@/components/Journey";
-import About from "@/components/About";
-import Contact from "@/components/Contact";
+import LiveArchitecture from "@/components/LiveArchitecture";
+import Projects from "@/components/Projects";
+import TechnicalNotes from "@/components/TechnicalNotes";
+import NowAndExperience from "@/components/NowAndExperience";
+import ContactSection from "@/components/ContactSection";
 
 export default function Home() {
-  const [isLoaded, setIsLoaded] = useState(false);
-
   return (
-    <main className="relative flex flex-col w-full min-h-screen bg-[#030305] text-[#f5f5f5] overflow-hidden">
-      {/* Dynamic ambient neural data canvas backdrop */}
-      <NeuralCanvas />
-
-      {/* Cyber-luxury initialization loader */}
-      {!isLoaded && <Loader onComplete={() => setIsLoaded(true)} />}
-
-      {/* Floating glassmorphic header */}
+    <main className="min-h-screen bg-[#f4f1ea] text-[#0f0f0f]">
+      {/* Navigation with Ask AI Ajin Drawer */}
       <Navigation />
 
-      {/* Hero section */}
-      <Hero isLoaded={isLoaded} />
+      {/* Hero with Slanted Neon Badge & Polaroid Card */}
+      <Hero />
 
-      {/* Architectural Capabilities */}
-      <WhatIBuild />
+      {/* Live System Architecture with Worker.log & Queue States */}
+      <LiveArchitecture />
 
-      {/* Selected Work Case Studies */}
-      <SelectedWork />
+      {/* Projects with System Parts Exposed */}
+      <Projects />
 
-      {/* Interactive AI & ML Lab Sandbox */}
-      <SystemPlayground />
+      {/* Technical Notes Section */}
+      <TechnicalNotes />
 
-      {/* Philosophy & Skill Arsenal */}
-      <About />
+      {/* Now & Experience Track Record */}
+      <NowAndExperience />
 
-      {/* Milestones & Academic Journey */}
-      <Journey />
-
-      {/* Prestigious Contact Deck */}
-      <Contact />
+      {/* Contact Section & Footer */}
+      <ContactSection />
     </main>
   );
 }
