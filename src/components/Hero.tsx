@@ -1,7 +1,17 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
-import { ArrowUpRight, Cpu, Database, Globe, Sparkles, Terminal, Activity } from "lucide-react";
+import {
+  ArrowUpRight,
+  Cpu,
+  Database,
+  Globe,
+  Sparkles,
+  Terminal,
+  MapPin,
+  Bot,
+  Zap,
+} from "lucide-react";
 
 interface HeroProps {
   isLoaded: boolean;
@@ -9,46 +19,55 @@ interface HeroProps {
 
 const disciplines = [
   {
-    id: "data",
-    icon: Database,
-    badge: "01 // SCIENCE",
-    title: "Data Science & Analytics",
-    tagline: "Uncovering signal in noise with statistical rigour.",
-    capabilities: [
-      "Exploratory Data Analysis (EDA)",
-      "Predictive Feature Engineering",
-      "Automated ETL Pipelines & Cleansing",
-      "Executive Power BI & SQL Dashboards",
-    ],
-    tech: ["Python", "Pandas", "NumPy", "SQL", "MySQL", "Tableau", "Power BI"],
-  },
-  {
     id: "ml",
     icon: Cpu,
-    badge: "02 // INTELLIGENCE",
-    title: "Applied AI & Machine Learning",
-    tagline: "Architecting generative & predictive models for production.",
+    color: "from-violet-500 to-fuchsia-500",
+    glowColor: "rgba(168, 85, 247, 0.25)",
+    borderActive: "border-purple-400/60",
+    badge: "01 // MACHINE LEARNING & AI",
+    title: "Applied ML & Generative AI",
+    tagline: "Building predictive models, RAG architectures, and agentic workflows.",
     capabilities: [
-      "Production RAG & Vector Embeddings",
-      "Supervised & Unsupervised ML Models",
-      "Agentic Tool-Calling Workflows",
-      "High-Throughput FastAPI Model Serving",
+      "Supervised Regression & Classification (Scikit-learn)",
+      "Retrieval-Augmented Generation (RAG) & Vector Search",
+      "Hyperparameter Tuning (GridSearchCV) & Cross-Validation",
+      "AI Agents, Prompt Engineering & Fast LLM Tooling",
     ],
-    tech: ["PyTorch", "Scikit-Learn", "FastAPI", "LLMs", "RAG", "LangChain"],
+    tech: ["Python", "Scikit-learn", "PyTorch", "RAG", "LLMs", "AI Agents", "FastAPI"],
+  },
+  {
+    id: "data",
+    icon: Database,
+    color: "from-cyan-400 to-blue-600",
+    glowColor: "rgba(6, 182, 212, 0.25)",
+    borderActive: "border-cyan-400/60",
+    badge: "02 // DATA SCIENCE & ANALYTICS",
+    title: "Data Science & Visual Analytics",
+    tagline: "Statistical analysis, ETL pipelines, and executive dashboards at Techolas.",
+    capabilities: [
+      "End-to-end data lifecycle: collection, cleaning & EDA",
+      "Predictive modeling on multi-thousand row real-world datasets",
+      "Interactive Power BI, Tableau & MS Excel dashboards",
+      "Relational database schemas with SQL & MySQL",
+    ],
+    tech: ["Python", "Pandas", "NumPy", "SQL", "MySQL", "Power BI", "Tableau", "Seaborn"],
   },
   {
     id: "web",
     icon: Globe,
-    badge: "03 // SYSTEMS",
-    title: "Full Stack Web Engineering",
-    tagline: "Delivering resilient, type-safe digital experiences.",
+    color: "from-emerald-400 to-teal-500",
+    glowColor: "rgba(16, 185, 129, 0.25)",
+    borderActive: "border-emerald-400/60",
+    badge: "03 // FULL-STACK & VENM STUDIO",
+    title: "Full-Stack & AI-Assisted Vibe Coding",
+    tagline: "Co-founder of Venm — shipping client platforms from pitch to live production.",
     capabilities: [
-      "Next.js 16 App Router & Edge Runtime",
-      "Python / Django & REST API Architecture",
-      "Interactive 60fps Web Animations (GSAP)",
-      "Accessible & Scalable UI Design Systems",
+      "AI-assisted ('vibe coding') with Claude Code & Google Antigravity",
+      "Full-stack web architectures (Python/Django, React, Next.js)",
+      "LegalTech, EdTech & Healthcare CRM/LMS platforms",
+      "Bilingual interfaces, role-based workflows & zero-delay UI",
     ],
-    tech: ["Next.js", "React 19", "TypeScript", "Django", "TailwindCSS", "Node"],
+    tech: ["Next.js", "Django", "TypeScript", "Tailwind CSS", "Claude Code", "Antigravity", "Vercel"],
   },
 ];
 
@@ -61,10 +80,10 @@ export default function Hero({ isLoaded }: HeroProps) {
 
     const ctx = gsap.context(() => {
       gsap.from(".hero-reveal", {
-        y: 40,
+        y: 35,
         opacity: 0,
-        duration: 0.9,
-        stagger: 0.12,
+        duration: 0.85,
+        stagger: 0.1,
         ease: "power3.out",
       });
     }, containerRef);
@@ -72,73 +91,68 @@ export default function Hero({ isLoaded }: HeroProps) {
     return () => ctx.revert();
   }, [isLoaded]);
 
-  const currentDiscipline = disciplines[activeTab];
-  const CurrentIcon = currentDiscipline.icon;
+  const current = disciplines[activeTab];
+  const CurrentIcon = current.icon;
 
   return (
     <section
       ref={containerRef}
       className="relative min-h-screen flex flex-col justify-center px-4 sm:px-8 lg:px-16 pt-32 pb-20 overflow-hidden"
     >
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-indigo-600/10 blur-[130px] rounded-full pointer-events-none" />
-      <div className="absolute top-1/3 left-1/4 w-[400px] h-[300px] bg-blue-500/10 blur-[100px] rounded-full pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto w-full flex flex-col gap-12 z-10">
-        {/* Top telemetry and status banner */}
-        <div className="hero-reveal flex flex-wrap items-center justify-between gap-4 border-b border-white/[0.08] pb-6">
-          <div className="flex items-center gap-3 font-mono text-[11px] text-zinc-400 uppercase tracking-widest">
-            <span className="px-2.5 py-1 rounded bg-white/[0.05] border border-white/10 text-white font-medium flex items-center gap-1.5">
-              <Terminal size={12} className="text-indigo-400" />
-              SYSTEM.ACTIVE
+      <div className="max-w-7xl mx-auto w-full flex flex-col gap-10 z-10">
+        {/* Top Status & Telemetry Bar with Colorful Glassmorphic Badges */}
+        <div className="hero-reveal flex flex-wrap items-center justify-between gap-4 glass-panel px-6 py-3.5 rounded-2xl">
+          <div className="flex flex-wrap items-center gap-3 font-mono text-xs text-slate-300">
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-violet-500/20 border border-violet-500/30 text-violet-200 font-semibold shadow-sm">
+              <Sparkles size={13} className="text-pink-400" />
+              AJIN K // MASTER PORTFOLIO
             </span>
-            <span className="hidden sm:inline">KOCHI, INDIA · UTC+5:30</span>
-            <span className="text-zinc-600">/</span>
-            <span className="text-zinc-300">DATA · AI · FULLSTACK</span>
+            <span className="flex items-center gap-1 text-slate-300">
+              <MapPin size={13} className="text-cyan-400" />
+              Nilambur, Kerala, India
+            </span>
+            <span className="hidden md:inline text-slate-600">|</span>
+            <span className="hidden md:inline text-indigo-300 font-medium">
+              Diploma in Data Science @ Techolas Technologies
+            </span>
           </div>
 
-          <div className="flex items-center gap-4 font-mono text-[11px] text-zinc-400">
-            <div className="flex items-center gap-2">
-              <Activity size={12} className="text-emerald-400" />
-              <span>INFERENCE: &lt;70MS</span>
-            </div>
-            <span className="hidden md:inline text-zinc-600">|</span>
-            <span className="hidden md:inline text-zinc-400">
-              MODELS DEPLOYED & TESTED
+          <div className="flex items-center gap-3 font-mono text-xs">
+            <span className="px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 flex items-center gap-1.5 font-medium">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              CO-FOUNDER @ VENM
             </span>
           </div>
         </div>
 
-        {/* Master Headline */}
+        {/* Master Headline with Rich Mixed Colors */}
         <div className="flex flex-col gap-6">
-          <div className="hero-reveal flex items-center gap-2 text-indigo-400 font-mono text-xs uppercase tracking-[0.25em]">
-            <Sparkles size={14} />
-            <span>AJIN K // CRAFTING APPLIED INTELLIGENCE</span>
+          <div className="hero-reveal flex items-center gap-2 font-mono text-xs uppercase tracking-[0.25em] text-cyan-300 font-semibold">
+            <Terminal size={14} className="text-cyan-400" />
+            <span>MACHINE LEARNING ENGINEER &amp; DATA SCIENTIST</span>
           </div>
 
-          <h1 className="hero-reveal font-display font-extrabold text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight uppercase text-white max-w-5xl">
-            Engineering <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-200 to-zinc-500">
-              Intelligence
-            </span>{" "}
-            from data <br />
-            to production.
+          <h1 className="hero-reveal font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.98] tracking-tight text-white uppercase">
+            Transforming Data <br />
+            <span className="gradient-text-primary">
+              Into Intelligent
+            </span> <br />
+            <span className="gradient-text-accent">
+              Living Systems.
+            </span>
           </h1>
 
-          <p className="hero-reveal font-sans text-base sm:text-lg md:text-xl text-zinc-400 max-w-3xl leading-relaxed">
-            I bridge the gap between <strong className="text-white font-medium">statistical data science</strong>,{" "}
-            <strong className="text-white font-medium">machine learning pipelines</strong>, and{" "}
-            <strong className="text-white font-medium">high-performance web architecture</strong>.
-            I turn raw data into trained models, and trained models into responsive, human-centered digital products.
+          <p className="hero-reveal font-sans text-base sm:text-lg md:text-xl text-slate-300 max-w-3xl leading-relaxed">
+            I am <strong className="text-white font-semibold">Ajin K</strong> — a BCA graduate &amp; Data Science professional based in Kerala. Currently completing my Diploma in Data Science at <strong className="text-cyan-300 font-medium">Techolas Technologies</strong> and co-founder of <strong className="text-purple-300 font-medium">Venm</strong> studio, where I architect ML pipelines, predictive analytics, and AI-assisted (<em className="text-pink-300 not-italic font-semibold">&quot;vibe coding&quot;</em>) full-stack web platforms using Claude Code and Google Antigravity.
           </p>
         </div>
 
-        {/* Action CTAs */}
-        <div className="hero-reveal flex flex-wrap items-center gap-4 pt-2">
+        {/* Action Buttons with Vibrant Glassmorphism */}
+        <div className="hero-reveal flex flex-wrap items-center gap-4 pt-1">
           <a
             href="#work"
-            data-cursor-label="EXPLORE"
-            className="group flex items-center gap-3 px-7 py-3.5 rounded-full bg-white text-black font-mono text-xs font-semibold uppercase tracking-wider hover:bg-zinc-200 transition-all duration-300 shadow-xl shadow-white/5"
+            data-cursor-label="PROJECTS"
+            className="group relative flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-gradient-to-r from-violet-600 via-fuchsia-600 to-cyan-500 hover:from-violet-500 hover:to-cyan-400 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-xl shadow-purple-600/30 hover:shadow-cyan-500/40"
           >
             <span>Explore Case Studies</span>
             <ArrowUpRight
@@ -149,41 +163,43 @@ export default function Hero({ isLoaded }: HeroProps) {
 
           <a
             href="#sandbox"
-            data-cursor-label="TEST ML"
-            className="group flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 text-white font-mono text-xs uppercase tracking-wider transition-all duration-300"
+            data-cursor-label="SANDBOX"
+            className="group flex items-center gap-2.5 px-6 py-3.5 rounded-full glass-panel hover:bg-slate-800/60 border border-white/15 hover:border-cyan-400/50 text-white font-mono text-xs uppercase tracking-wider transition-all duration-300 shadow-lg"
           >
-            <Cpu size={14} className="text-indigo-400" />
+            <Zap size={14} className="text-cyan-400 group-hover:animate-bounce" />
             <span>Interactive ML Sandbox</span>
           </a>
 
           <a
-            href="#contact"
-            data-cursor-label="CHAT"
-            className="text-zinc-400 hover:text-white font-mono text-xs uppercase tracking-wider px-4 py-2 transition-colors ml-auto sm:ml-0"
+            href="#venm"
+            data-cursor-label="VENM"
+            className="group flex items-center gap-2 px-5 py-3 rounded-full bg-purple-950/40 border border-purple-500/30 hover:border-purple-400 text-purple-200 font-mono text-xs uppercase tracking-wider transition-all"
           >
-            Direct Contact →
+            <Bot size={14} className="text-fuchsia-400" />
+            <span>Venm Studio Work</span>
           </a>
         </div>
 
-        {/* Interactive Discipline Switcher */}
-        <div className="hero-reveal mt-6 bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col gap-6 shadow-2xl">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/[0.08] pb-5">
-            <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">
-              DISCIPLINE DEEP-DIVE [SELECT TO INSPECT]:
+        {/* Interactive Discipline Tabs with Vivid Glassmorphism */}
+        <div className="hero-reveal glass-panel-glow rounded-3xl p-6 sm:p-8 flex flex-col gap-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+            <span className="font-mono text-xs uppercase tracking-widest text-slate-400 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+              SELECT CORE SPECIALIZATION TO INSPECT:
             </span>
             <div className="flex flex-wrap gap-2">
               {disciplines.map((d, index) => (
                 <button
                   key={d.id}
                   onClick={() => setActiveTab(index)}
-                  data-cursor-label="SELECT"
-                  className={`px-3.5 py-1.5 rounded-full font-mono text-xs tracking-wider transition-all duration-200 ${
+                  data-cursor-label="INSPECT"
+                  className={`px-4 py-2 rounded-full font-mono text-xs font-semibold tracking-wider transition-all duration-200 ${
                     activeTab === index
-                      ? "bg-white text-black font-semibold shadow-md"
-                      : "bg-white/[0.04] text-zinc-400 hover:text-white border border-white/5"
+                      ? `bg-gradient-to-r ${d.color} text-white shadow-lg shadow-purple-500/30 scale-105`
+                      : "bg-white/[0.04] text-slate-400 hover:text-white border border-white/10 hover:border-white/25"
                   }`}
                 >
-                  {d.badge.split("//")[1]?.trim() || d.badge}
+                  {d.title.split("&")[0].trim()}
                 </button>
               ))}
             </div>
@@ -192,49 +208,51 @@ export default function Hero({ isLoaded }: HeroProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             <div className="lg:col-span-5 flex flex-col gap-3">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-white/[0.06] border border-white/10 text-white">
-                  <CurrentIcon size={20} />
+                <div
+                  className={`p-3 rounded-2xl bg-gradient-to-tr ${current.color} text-white shadow-lg shadow-violet-500/30`}
+                >
+                  <CurrentIcon size={24} />
                 </div>
                 <div>
-                  <span className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase">
-                    {currentDiscipline.badge}
+                  <span className="font-mono text-[10px] text-cyan-300 tracking-widest uppercase font-bold">
+                    {current.badge}
                   </span>
-                  <h3 className="font-display font-bold text-xl sm:text-2xl text-white">
-                    {currentDiscipline.title}
+                  <h3 className="font-display font-extrabold text-2xl text-white">
+                    {current.title}
                   </h3>
                 </div>
               </div>
-              <p className="font-sans text-sm text-zinc-400 leading-relaxed mt-2">
-                {currentDiscipline.tagline}
+              <p className="font-sans text-sm text-slate-300 leading-relaxed mt-2">
+                {current.tagline}
               </p>
             </div>
 
             <div className="lg:col-span-4 flex flex-col gap-2.5">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-slate-400 font-semibold">
                 CORE CAPABILITIES:
               </span>
-              <ul className="flex flex-col gap-1.5">
-                {currentDiscipline.capabilities.map((cap, i) => (
+              <ul className="flex flex-col gap-2">
+                {current.capabilities.map((cap, i) => (
                   <li
                     key={i}
-                    className="flex items-center gap-2 font-mono text-xs text-zinc-300"
+                    className="flex items-start gap-2 font-mono text-xs text-slate-200 leading-snug"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
-                    {cap}
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0 mt-1.5" />
+                    <span>{cap}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
             <div className="lg:col-span-3 flex flex-col gap-2.5">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">
-                ACTIVE TOOLKIT:
+              <span className="font-mono text-[10px] uppercase tracking-widest text-slate-400 font-semibold">
+                TOOLKIT IN USE:
               </span>
               <div className="flex flex-wrap gap-1.5">
-                {currentDiscipline.tech.map((tool) => (
+                {current.tech.map((tool) => (
                   <span
                     key={tool}
-                    className="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 font-mono text-[11px] text-zinc-300"
+                    className="px-2.5 py-1 rounded-lg bg-white/[0.06] border border-white/15 font-mono text-[11px] text-slate-200 font-medium hover:border-purple-400/50 transition-colors"
                   >
                     {tool}
                   </span>

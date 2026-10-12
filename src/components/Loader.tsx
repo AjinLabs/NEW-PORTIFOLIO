@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { Sparkles, MapPin } from "lucide-react";
 
 export default function Loader({ onComplete }: { onComplete: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -9,9 +10,9 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
 
   useEffect(() => {
     const statuses = [
-      "INITIALIZING NEURAL WEIGHTS...",
-      "CALIBRATING FEATURE PIPELINES...",
-      "SYNCING DISTRIBUTED API RUNTIMES...",
+      "INITIALIZING NEURAL WEIGHTS & SCIKIT-LEARN...",
+      "CALIBRATING TECHOLAS DATA PIPELINES...",
+      "LAUNCHING VENM STUDIO VIBE ARCHITECTURE...",
       "SYSTEM READY // AJIN K",
     ];
 
@@ -29,7 +30,7 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
     const progressObj = { value: 0 };
     tl.to(progressObj, {
       value: 100,
-      duration: 1.5,
+      duration: 1.4,
       ease: "power2.inOut",
       onUpdate: () => {
         const val = Math.floor(progressObj.value);
@@ -49,47 +50,55 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-50 bg-[#030305] flex flex-col items-center justify-between p-8 md:p-16 text-white selection:bg-none"
+      className="fixed inset-0 z-50 bg-[#06070c] flex flex-col items-center justify-between p-8 md:p-16 text-white selection:bg-none overflow-hidden"
     >
+      {/* Background ambient glowing orbs */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-violet-600/20 blur-[130px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/20 blur-[130px] rounded-full pointer-events-none" />
+
       {/* Top telemetry */}
-      <div className="w-full flex justify-between items-center text-[10px] md:text-xs font-mono text-zinc-500 uppercase tracking-widest border-b border-white/5 pb-4">
-        <span>SYS_INIT :: KERNEL_v2.4</span>
-        <span className="flex items-center gap-2">
+      <div className="w-full flex justify-between items-center text-[10px] md:text-xs font-mono text-slate-400 uppercase tracking-widest border-b border-white/10 pb-4 relative z-10">
+        <span className="flex items-center gap-1.5 text-cyan-300">
+          <MapPin size={12} />
+          NILAMBUR, KERALA · TECHOLAS KOCHI
+        </span>
+        <span className="flex items-center gap-2 text-emerald-400 font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          CALIBRATING RUNTIME
+          CALIBRATING MASTER RUNTIME
         </span>
       </div>
 
       {/* Center hero identity */}
-      <div className="flex flex-col items-center text-center max-w-2xl px-4">
-        <span className="font-mono text-xs uppercase tracking-[0.3em] text-zinc-400 mb-4">
-          PORTFOLIO ARCHITECTURE
+      <div className="flex flex-col items-center text-center max-w-2xl px-4 relative z-10">
+        <span className="font-mono text-xs uppercase tracking-[0.3em] text-cyan-300 mb-4 flex items-center gap-1.5 font-semibold">
+          <Sparkles size={14} className="text-pink-400" />
+          MACHINE LEARNING ENGINEER &amp; DATA SCIENTIST
         </span>
-        <h1 className="font-display font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tight text-white mb-6">
+        <h1 className="font-display font-black text-6xl md:text-8xl lg:text-9xl tracking-tight uppercase mb-6 bg-gradient-to-r from-cyan-300 via-violet-300 to-pink-400 bg-clip-text text-transparent drop-shadow-lg">
           AJIN K
         </h1>
-        <div className="flex flex-wrap justify-center gap-3 font-mono text-xs md:text-sm text-zinc-400 uppercase tracking-wider">
-          <span className="px-3 py-1 bg-white/[0.04] border border-white/10 rounded-full">
-            Data Science
+        <div className="flex flex-wrap justify-center gap-3 font-mono text-xs md:text-sm uppercase tracking-wider">
+          <span className="px-3.5 py-1.5 bg-violet-950/50 border border-violet-500/30 text-violet-200 rounded-full shadow-sm">
+            Machine Learning
           </span>
-          <span className="px-3 py-1 bg-white/[0.04] border border-white/10 rounded-full">
-            AI / ML Engineering
+          <span className="px-3.5 py-1.5 bg-cyan-950/50 border border-cyan-500/30 text-cyan-200 rounded-full shadow-sm">
+            Data Science &amp; EDA
           </span>
-          <span className="px-3 py-1 bg-white/[0.04] border border-white/10 rounded-full">
-            Full Stack Systems
+          <span className="px-3.5 py-1.5 bg-pink-950/50 border border-pink-500/30 text-pink-200 rounded-full shadow-sm">
+            Venm Studio
           </span>
         </div>
       </div>
 
       {/* Bottom loader meter */}
-      <div className="w-full max-w-md flex flex-col gap-3">
-        <div className="flex justify-between items-center font-mono text-xs text-zinc-400">
-          <span className="text-[11px] text-zinc-400 tracking-wider">{statusText}</span>
-          <span className="text-white font-semibold">{progress}%</span>
+      <div className="w-full max-w-md flex flex-col gap-3 relative z-10">
+        <div className="flex justify-between items-center font-mono text-xs text-slate-300">
+          <span className="text-[11px] text-cyan-300 tracking-wider font-semibold">{statusText}</span>
+          <span className="text-white font-bold">{progress}%</span>
         </div>
-        <div className="w-full h-[2px] bg-white/10 rounded-full overflow-hidden relative">
+        <div className="w-full h-[3px] bg-white/10 rounded-full overflow-hidden relative shadow-sm">
           <div
-            className="h-full bg-gradient-to-r from-blue-500 via-indigo-400 to-white transition-all duration-75 rounded-full"
+            className="h-full bg-gradient-to-r from-cyan-400 via-violet-500 to-fuchsia-400 shadow-[0_0_15px_rgba(168,85,247,0.8)] transition-all duration-75 rounded-full"
             style={{ width: `${progress}%` }}
           />
         </div>

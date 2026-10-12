@@ -6,62 +6,70 @@ const capabilities = [
   {
     num: "01",
     icon: Database,
-    title: "Data Science & Analytical Engineering",
-    tagline: "Statistical analysis, ETL pipelines, and decision intelligence.",
+    gradient: "from-blue-500 via-indigo-500 to-cyan-400",
+    badgeColor: "text-cyan-300 bg-cyan-950/40 border-cyan-500/30",
+    title: "Data Science & Tabular Analytics",
+    tagline: "Statistical analysis, EDA, data cleansing, and executive visualization.",
     description:
-      "Transforming raw, noisy tabular data into actionable statistical insight. I engineer rigorous data pipelines from ingestion to automated cleaning, feature extraction, and executive visualization.",
+      "Trained on real-world datasets through Techolas Technologies Diploma program. Comfortable across the entire data science lifecycle: data collection, cleaning, exploratory analysis (EDA), predictive feature engineering, and reporting.",
     deliverables: [
-      "Exploratory Data Analysis (EDA) & hypothesis testing",
-      "Automated feature engineering & data preprocessing",
-      "Time-series forecasting & trend decomposition",
-      "Interactive Power BI, Tableau & MySQL analytical dashboards",
+      "Exploratory Data Analysis (EDA) with Pandas, NumPy, Matplotlib & Seaborn",
+      "Predictive modeling on tabular data (regression, classification, clustering)",
+      "Interactive executive dashboards in Power BI, Tableau & MS Excel",
+      "Relational database design, querying and data pipelines with SQL / MySQL",
     ],
     tech: ["Python", "Pandas", "NumPy", "SQL", "MySQL", "Power BI", "Tableau", "Excel"],
   },
   {
     num: "02",
     icon: Cpu,
-    title: "Applied Machine Learning Systems",
-    tagline: "Predictive modeling, classification, and neural pipelines.",
+    gradient: "from-purple-500 via-fuchsia-500 to-pink-500",
+    badgeColor: "text-fuchsia-300 bg-fuchsia-950/40 border-fuchsia-500/30",
+    title: "Applied Machine Learning & AI",
+    tagline: "Supervised pipelines, cross-validation, and generative AI workflows.",
     description:
-      "Building and evaluating high-precision machine learning models. From tree-based ensembles (Random Forest, XGBoost) to PyTorch deep learning architectures, optimized for low inference latency and high generalization.",
+      "Building and evaluating models using Scikit-learn with rigorous cross-validation and hyperparameter optimization (GridSearchCV). Expanding into Generative AI concepts: RAG systems, LLM orchestration, and AI Agents.",
     deliverables: [
-      "Supervised classification & regression pipelines",
-      "Anomaly detection & customer segmentation clustering",
-      "Hyperparameter optimization & k-fold cross-validation",
-      "Inference acceleration & FastAPI microservice endpoints",
+      "End-to-end regression & classification pipelines (California Housing, etc.)",
+      "Hyperparameter tuning (GridSearchCV), k-fold CV, and metric evaluation (MAE, RMSE, R²)",
+      "Retrieval-Augmented Generation (RAG) with vector search & prompt engineering",
+      "AI-driven student recommendations & weak-topic detection models",
     ],
-    tech: ["PyTorch", "Scikit-Learn", "FastAPI", "Python", "Algorithms", "Model Registry"],
+    tech: ["Scikit-learn", "Python", "RAG", "LLMs", "AI Agents", "Prompt Engineering", "Streamlit"],
   },
   {
     num: "03",
-    icon: Brain,
-    title: "Generative AI & Agentic Architectures",
-    tagline: "Production RAG, vector search, and LLM orchestration.",
+    icon: Layers,
+    gradient: "from-emerald-400 via-teal-500 to-cyan-500",
+    badgeColor: "text-emerald-300 bg-emerald-950/40 border-emerald-500/30",
+    title: "Full-Stack Web Engineering",
+    tagline: "Python / Django backends, Next.js / React frontends, and REST APIs.",
     description:
-      "Creating modern AI products powered by large language models. I build hybrid vector retrieval pipelines with dense embeddings, cross-encoder reranking, and autonomous tool-calling agents.",
+      "Proven internship experience at Byteboot Techno Solutions and RISS Technologies. Building responsive web applications with secure authentication, CRUD operations, database integrations, and high-performance edge deployment.",
     deliverables: [
-      "Retrieval-Augmented Generation (RAG) with vector databases",
-      "Semantic search with hybrid BM25 + dense embeddings",
-      "Tool-calling agents with structured JSON outputs",
-      "Prompt optimization & hallucination mitigation safeguards",
+      "Python / Django full-stack backends with relational database integration",
+      "Modern Next.js & React single-page interfaces with Tailwind CSS",
+      "Healthcare patient portals (Recallio at RISS Technologies)",
+      "RESTful API design, token authentication & CRUD pipelines",
     ],
-    tech: ["LLMs", "RAG", "LangChain", "Vector DBs", "Embeddings", "Hugging Face"],
+    tech: ["Django", "Python", "React", "Next.js", "JavaScript", "HTML/CSS", "Firebase", "REST APIs"],
   },
   {
     num: "04",
-    icon: Layers,
-    title: "Full-Stack Web Engineering",
-    tagline: "High-performance, type-safe web applications.",
+    icon: Brain,
+    gradient: "from-amber-400 via-rose-500 to-purple-600",
+    badgeColor: "text-amber-300 bg-amber-950/40 border-amber-500/30",
+    title: "Venm Studio & AI Vibe Coding",
+    tagline: "End-to-end freelance web systems built with Claude Code & Google Antigravity.",
     description:
-      "Engineering resilient web platforms where end-users interact with data and intelligence. Built with modern React and Next.js on the client, backed by Python/Django or Node APIs.",
+      "Co-founder of Venm studio alongside Akash Tomy and Ashish P S. Independently designing, pitching, building, and deploying full-stack and AI-assisted ('vibe coding') platforms for LegalTech, EdTech, and enterprise businesses.",
     deliverables: [
-      "Next.js 16 App Router with server-side rendering & streaming",
-      "Python / Django full-stack backends with RESTful APIs",
-      "Type-safe TypeScript architectures with Tailwind CSS",
-      "Smooth 60fps micro-animations (GSAP & Framer Motion)",
+      "Rapid full-stack delivery using Claude Code and Google Antigravity workflows",
+      "Large-scale LegalTech CRM & Case Management (Vakkeel & Associates)",
+      "Competitive Law Entrance LMS with Computer-Based Test Engine",
+      "Cold-outreach client pitching & end-to-end production delivery",
     ],
-    tech: ["Next.js", "React 19", "TypeScript", "Django", "Tailwind CSS", "REST APIs"],
+    tech: ["Venm Studio", "Claude Code", "Google Antigravity", "Vibe Coding", "Next.js", "Vercel"],
   },
 ];
 
@@ -70,24 +78,24 @@ export default function WhatIBuild() {
 
   return (
     <section id="expertise" className="py-28 px-4 sm:px-8 lg:px-16 relative">
-      <div className="max-w-7xl mx-auto flex flex-col gap-14">
+      <div className="max-w-7xl mx-auto flex flex-col gap-12">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-8">
           <div>
-            <span className="font-mono text-xs uppercase tracking-[0.25em] text-indigo-400 block mb-3">
-              WHAT I DELIVER // CORE COMPETENCIES
+            <span className="font-mono text-xs uppercase tracking-[0.25em] text-cyan-300 font-semibold block mb-2">
+              CORE DOMAINS &amp; SERVICES
             </span>
             <h2 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-white">
-              Architectural Expertise
+              What I Build &amp; Deliver
             </h2>
           </div>
-          <p className="font-sans text-sm sm:text-base text-zinc-400 max-w-md">
-            Four interconnected disciplines forming a complete cycle: raw data → trained model → intelligent backend → polished web application.
+          <p className="font-sans text-sm sm:text-base text-slate-300 max-w-md">
+            Four specialized domains spanning data science, applied machine learning, Python full-stack systems, and AI-assisted freelance platforms via Venm.
           </p>
         </div>
 
-        {/* Capabilities Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* 4 Multi-Color Glassmorphic Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
           {capabilities.map((cap, index) => {
             const Icon = cap.icon;
             const isHovered = activeCard === index;
@@ -97,52 +105,61 @@ export default function WhatIBuild() {
                 key={cap.num}
                 onMouseEnter={() => setActiveCard(index)}
                 onMouseLeave={() => setActiveCard(null)}
-                data-cursor-label="EXPAND"
-                className={`group relative p-8 sm:p-10 rounded-2xl border transition-all duration-300 flex flex-col justify-between gap-8 bg-black/60 backdrop-blur-xl ${
+                data-cursor-label="EXPLORE"
+                className={`group relative p-8 sm:p-10 rounded-3xl glass-panel transition-all duration-300 flex flex-col justify-between gap-8 ${
                   isHovered
-                    ? "border-white/40 shadow-2xl shadow-indigo-500/10 bg-zinc-950/80"
-                    : "border-white/10 hover:border-white/20"
+                    ? "border-white/35 shadow-2xl scale-[1.01]"
+                    : "hover:border-white/20"
                 }`}
               >
-                {/* Top card info */}
-                <div className="flex flex-col gap-6">
+                {/* Floating ambient colored gradient aura on hover */}
+                <div
+                  className={`absolute -top-12 -right-12 w-48 h-48 bg-gradient-to-br ${cap.gradient} opacity-0 group-hover:opacity-20 blur-3xl rounded-full transition-opacity duration-500 pointer-events-none`}
+                />
+
+                <div className="flex flex-col gap-6 relative z-10">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="p-3 rounded-xl bg-white/[0.05] border border-white/10 text-white group-hover:bg-white group-hover:text-black transition-colors duration-300">
+                      <div
+                        className={`p-3 rounded-2xl bg-gradient-to-tr ${cap.gradient} text-white shadow-lg shadow-purple-500/20`}
+                      >
                         <Icon size={22} />
                       </div>
-                      <span className="font-mono text-xs text-indigo-400 uppercase tracking-widest">
+                      <span
+                        className={`font-mono text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border ${cap.badgeColor}`}
+                      >
                         DOM {cap.num}
                       </span>
                     </div>
+
                     <ArrowUpRight
                       size={20}
-                      className="text-zinc-500 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-200"
+                      className="text-slate-400 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-200"
                     />
                   </div>
 
                   <div>
-                    <h3 className="font-display font-bold text-2xl sm:text-3xl text-white group-hover:text-white transition-colors">
+                    <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-cyan-200 transition-all">
                       {cap.title}
                     </h3>
-                    <p className="font-mono text-xs text-zinc-400 mt-2 tracking-wide">
+                    <p className="font-mono text-xs text-indigo-300 mt-2 font-medium">
                       {cap.tagline}
                     </p>
-                    <p className="font-sans text-sm text-zinc-400 leading-relaxed mt-4">
+                    <p className="font-sans text-sm text-slate-300 leading-relaxed mt-4">
                       {cap.description}
                     </p>
                   </div>
 
-                  {/* Deliverables checklist */}
-                  <div className="flex flex-col gap-2 pt-4 border-t border-white/[0.06]">
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">
-                      KEY DELIVERABLES:
+                  {/* Deliverables Checklist */}
+                  <div className="flex flex-col gap-2 pt-4 border-t border-white/[0.08]">
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-slate-400 font-semibold">
+                      VERIFIED DELIVERABLES:
                     </span>
-                    <ul className="flex flex-col gap-1.5">
+                    <ul className="flex flex-col gap-2">
                       {cap.deliverables.map((item, i) => (
                         <li
                           key={i}
-                          className="flex items-start gap-2 font-mono text-xs text-zinc-300 leading-snug"
+                          className="flex items-start gap-2.5 font-mono text-xs text-slate-200 leading-snug"
                         >
                           <CheckCircle2 size={13} className="text-emerald-400 shrink-0 mt-0.5" />
                           <span>{item}</span>
@@ -152,12 +169,12 @@ export default function WhatIBuild() {
                   </div>
                 </div>
 
-                {/* Tech chips */}
-                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-white/[0.06]">
+                {/* Tech toolkit tags */}
+                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-white/[0.08] relative z-10">
                   {cap.tech.map((t) => (
                     <span
                       key={t}
-                      className="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/10 font-mono text-[11px] text-zinc-400 group-hover:text-zinc-200 group-hover:border-white/20 transition-colors"
+                      className="px-2.5 py-1 rounded-lg bg-white/[0.05] border border-white/10 font-mono text-[11px] text-slate-300 font-medium group-hover:border-white/20 transition-colors"
                     >
                       {t}
                     </span>
