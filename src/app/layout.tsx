@@ -47,7 +47,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${outfit.variable} ${jetbrainsMono.variable} h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-full bg-[#f4f1ea] text-[#0f0f0f]">
+      <body className="min-h-full bg-[#F5F3EE] text-[#111111]">
         {children}
       </body>
     </html>

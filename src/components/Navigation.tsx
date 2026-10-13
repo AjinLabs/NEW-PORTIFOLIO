@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { MessageSquare, X, Send, Bot, Check, ArrowUpRight } from "lucide-react";
+import { MessageSquare, X, Send, Menu } from "lucide-react";
 
 const navLinks = [
   { name: "Architecture", href: "#architecture" },
@@ -12,6 +12,7 @@ const navLinks = [
 ];
 
 export default function Navigation() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAiModalOpen, setIsAiModalOpen] = useState(false);
   const [aiQuestion, setAiQuestion] = useState("");
   const [messages, setMessages] = useState<Array<{ sender: "user" | "ai"; text: string }>>([
@@ -51,66 +52,97 @@ export default function Navigation() {
   return (
     <>
       {/* Top Navbar */}
-      <header className="sticky top-0 z-40 bg-[#f4f1ea]/90 backdrop-blur-md border-b border-black/10 px-4 sm:px-8 py-4">
+      <header className="sticky top-0 z-40 bg-[#F5F3EE]/90 backdrop-blur-md border-b border-[#111111]/15 px-4 sm:px-8 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* Logo with Green Highlight */}
-          <a href="#" className="flex flex-col group">
-            <span className="font-display font-black text-xl text-black tracking-tighter">
+          {/* Logo with Electric Blue Highlight */}
+          <a href="#" className="flex flex-col group" aria-label="Ajin K Portfolio Home">
+            <span className="font-display font-black text-xl text-[#111111] tracking-tighter">
               AK
             </span>
-            <span className="block h-[3px] w-full bg-[#ccff00] border-t border-black/30"></span>
+            <span className="block h-[3px] w-full bg-[#245BDB] border-t border-[#111111]/30"></span>
           </a>
 
-          {/* Center Links */}
-          <nav className="hidden md:flex items-center gap-7">
+          {/* Center Links (Desktop) */}
+          <nav className="hidden md:flex items-center gap-7" aria-label="Main Navigation">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="font-mono text-xs text-black/75 hover:text-black font-semibold tracking-wider transition-colors"
+                className="font-mono text-xs text-[#111111]/80 hover:text-[#245BDB] font-semibold tracking-wider transition-colors relative py-1 group"
               >
-                {link.name}
+                <span>{link.name}</span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#245BDB] transition-all duration-200 group-hover:w-full" />
               </a>
             ))}
           </nav>
 
-          {/* Right Action Button */}
+          {/* Right Action & Mobile Toggle */}
           <div className="flex items-center gap-3">
             <a
               href="mailto:ajink.offcial@gmail.com"
-              className="bg-black text-white hover:bg-neutral-800 px-5 py-2 rounded-full font-mono text-xs font-semibold uppercase tracking-wider transition-all"
+              className="bg-[#245BDB] text-white hover:bg-[#1d4ed8] border-2 border-[#111111] px-5 py-2 rounded-full font-mono text-xs font-bold uppercase tracking-wider shadow-[3px_3px_0px_#111111] hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all"
             >
               email me
             </a>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 bg-white border-2 border-[#111111] text-[#111111] shadow-[2px_2px_0px_#111111] hover:bg-[#DBEAFE] transition-colors"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
+            >
+              {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Navigation Menu Dropdown */}
+        {isMobileMenuOpen && (
+          <nav
+            className="md:hidden mt-3 pt-3 border-t-2 border-[#111111] bg-[#F5F3EE] p-4 flex flex-col gap-2 rounded-lg border-2 shadow-[4px_4px_0px_#111111]"
+            aria-label="Mobile Navigation"
+          >
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="font-mono text-xs font-bold text-[#111111] hover:text-[#245BDB] hover:bg-[#DBEAFE] p-2.5 border border-transparent hover:border-[#111111] transition-all flex items-center justify-between"
+              >
+                <span>{link.name}</span>
+                <span className="text-[#245BDB] font-mono text-[10px]">→</span>
+              </a>
+            ))}
+          </nav>
+        )}
       </header>
 
       {/* Floating Bottom-Right "ASK AI AJIN" Button */}
       <button
         onClick={() => setIsAiModalOpen(true)}
-        className="fixed bottom-6 right-6 z-50 bg-black text-white border-2 border-black px-4 py-2.5 rounded-lg shadow-[4px_4px_0px_#ccff00] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all flex items-center gap-2 font-mono text-xs font-bold"
+        className="fixed bottom-6 right-6 z-50 bg-[#17243A] text-white border-2 border-[#111111] px-4 py-2.5 rounded-lg shadow-[4px_4px_0px_#245BDB] hover:shadow-[5px_5px_0px_#245BDB] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all flex items-center gap-2 font-mono text-xs font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-[#245BDB]"
         aria-label="Open Ask AI Ajin Chat"
       >
-        <MessageSquare size={15} className="text-[#ccff00]" />
+        <MessageSquare size={15} className="text-[#DBEAFE]" />
         <span>ASK AI AJIN</span>
       </button>
 
       {/* Ask AI Ajin Drawer Modal */}
       {isAiModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-end sm:items-center justify-center p-4">
-          <div className="w-full max-w-lg bg-[#f4f1ea] border-2 border-black rounded-2xl shadow-[8px_8px_0px_#000] flex flex-col max-h-[85vh] overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-50 bg-[#111111]/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-4">
+          <div className="w-full max-w-lg bg-[#F5F3EE] border-2 border-[#111111] rounded-2xl shadow-[8px_8px_0px_#111111] flex flex-col max-h-[85vh] overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             {/* Modal Header */}
-            <div className="bg-black text-white p-4 flex items-center justify-between border-b-2 border-black">
+            <div className="bg-[#17243A] text-white p-4 flex items-center justify-between border-b-2 border-[#111111]">
               <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#ccff00] animate-pulse" />
-                <span className="font-mono text-xs font-bold uppercase tracking-wider">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#245BDB] ring-2 ring-[#DBEAFE] animate-pulse" />
+                <span className="font-mono text-xs font-bold uppercase tracking-wider text-white">
                   AI AJIN // VIBE ASSISTANT
                 </span>
               </div>
               <button
                 onClick={() => setIsAiModalOpen(false)}
-                className="text-white/70 hover:text-white p-1"
+                className="text-white/70 hover:text-white p-1 hover:bg-white/10 rounded transition-colors"
                 aria-label="Close Modal"
               >
                 <X size={18} />
@@ -126,14 +158,14 @@ export default function Navigation() {
                     m.sender === "user" ? "items-end" : "items-start"
                   }`}
                 >
-                  <span className="font-mono text-[9px] uppercase text-black/50 mb-1">
+                  <span className="font-mono text-[9px] uppercase text-[#111111]/50 mb-1">
                     {m.sender === "user" ? "$ guest" : "$ ai_ajin"}
                   </span>
                   <div
                     className={`p-3 rounded-xl max-w-[85%] text-xs font-sans leading-relaxed ${
                       m.sender === "user"
-                        ? "bg-black text-white rounded-br-none"
-                        : "bg-white border-2 border-black text-black shadow-[2px_2px_0px_#000] rounded-bl-none"
+                        ? "bg-[#17243A] text-white rounded-br-none border border-[#111111]"
+                        : "bg-white border-2 border-[#111111] text-[#111111] shadow-[2px_2px_0px_#111111] rounded-bl-none"
                     }`}
                   >
                     {m.text}
@@ -143,7 +175,7 @@ export default function Navigation() {
             </div>
 
             {/* Quick Prompt Suggestions */}
-            <div className="px-4 py-2 border-t border-black/10 flex flex-wrap gap-1.5 bg-[#ece8de]">
+            <div className="px-4 py-2.5 border-t border-[#111111]/15 flex flex-wrap gap-1.5 bg-[#EBE7DE]">
               {[
                 "Tell me about Law Entrance LMS",
                 "What is Venm Studio?",
@@ -155,7 +187,7 @@ export default function Navigation() {
                   onClick={() => {
                     setAiQuestion(suggestion);
                   }}
-                  className="font-mono text-[10px] bg-white border border-black px-2.5 py-1 rounded hover:bg-[#ccff00] transition-colors"
+                  className="font-mono text-[10px] bg-white border border-[#111111] px-2.5 py-1 rounded text-[#111111] hover:bg-[#DBEAFE] hover:text-[#17243A] hover:border-[#245BDB] transition-colors"
                 >
                   {suggestion}
                 </button>
@@ -163,17 +195,18 @@ export default function Navigation() {
             </div>
 
             {/* Form Input */}
-            <form onSubmit={handleAskAi} className="p-3 bg-white border-t-2 border-black flex gap-2">
+            <form onSubmit={handleAskAi} className="p-3 bg-white border-t-2 border-[#111111] flex gap-2">
               <input
                 type="text"
                 placeholder="Ask about models, datasets, Venm studio, or hiring..."
                 value={aiQuestion}
                 onChange={(e) => setAiQuestion(e.target.value)}
-                className="flex-1 font-sans text-xs px-3 py-2 bg-transparent focus:outline-none"
+                className="flex-1 font-sans text-xs px-3 py-2 bg-[#F5F3EE] border border-[#111111]/20 rounded focus:border-[#245BDB] focus:bg-white focus:outline-none transition-colors text-[#111111]"
               />
               <button
                 type="submit"
-                className="bg-black text-white px-4 py-2 rounded font-mono text-xs font-bold hover:bg-[#ccff00] hover:text-black transition-colors"
+                className="bg-[#245BDB] text-white px-4 py-2 rounded font-mono text-xs font-bold hover:bg-[#1d4ed8] transition-colors flex items-center justify-center shadow-[2px_2px_0px_#111111]"
+                aria-label="Send message"
               >
                 <Send size={13} />
               </button>

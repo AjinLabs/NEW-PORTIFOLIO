@@ -35,16 +35,16 @@ const notes = [
 
 export default function TechnicalNotes() {
   return (
-    <section id="notes" className="py-24 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto border-t-2 border-black/10">
-      {/* Green Marker and Headline */}
-      <div className="w-12 h-1.5 bg-[#ccff00] border border-black mb-4" />
+    <section id="notes" className="py-24 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto border-t-2 border-[#111111]/15">
+      {/* Electric Blue Marker and Headline */}
+      <div className="w-12 h-1.5 bg-[#245BDB] border border-[#111111] mb-4" />
 
       <div className="max-w-3xl mb-16">
-        <h2 className="text-4xl sm:text-6xl font-display leading-[1.0] text-black mb-4">
+        <h2 className="text-4xl sm:text-6xl font-display leading-[1.0] text-[#111111] mb-4">
           <span className="font-light block">Technical notes</span>
           <span className="font-black block">I should write fully.</span>
         </h2>
-        <p className="font-sans text-base text-black/75 leading-relaxed">
+        <p className="font-sans text-base text-[#111111]/80 leading-relaxed">
           Architectural convictions, lessons learned from client deployments, and what breaks when theory meets live traffic.
         </p>
       </div>
@@ -54,28 +54,28 @@ export default function TechnicalNotes() {
         {notes.map((note) => (
           <div
             key={note.num}
-            className="group bg-white border-2 border-black p-7 sm:p-8 shadow-[5px_5px_0px_#000] flex flex-col justify-between gap-6 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[7px_7px_0px_#000] transition-all cursor-pointer"
+            className="group bg-white border-2 border-[#111111] p-7 sm:p-8 shadow-[5px_5px_0px_#111111] flex flex-col justify-between gap-6 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[7px_7px_0px_#245BDB] transition-all cursor-pointer"
           >
             <div className="flex flex-col gap-4">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[10px] bg-[#ccff00] border border-black font-bold px-2.5 py-0.5 tracking-wider">
+                <span className="font-mono text-[10px] bg-[#DBEAFE] text-[#17243A] border border-[#111111] font-bold px-2.5 py-0.5 tracking-wider">
                   {note.tag}
                 </span>
-                <span className="font-mono text-sm font-black text-black/40 group-hover:text-black transition-colors">
+                <span className="font-mono text-sm font-black text-[#111111]/40 group-hover:text-[#245BDB] transition-colors">
                   {note.num}
                 </span>
               </div>
 
-              <h3 className="font-display font-black text-xl sm:text-2xl text-black leading-snug group-hover:text-black">
+              <h3 className="font-display font-black text-xl sm:text-2xl text-[#111111] leading-snug group-hover:text-[#17243A]">
                 {note.title}
               </h3>
 
-              <p className="font-sans text-xs sm:text-sm text-black/75 leading-relaxed">
+              <p className="font-sans text-xs sm:text-sm text-[#111111]/75 leading-relaxed">
                 {note.summary}
               </p>
             </div>
 
-            <div className="pt-4 border-t border-black/10 flex items-center justify-between font-mono text-xs font-bold text-black group-hover:text-black">
+            <div className="pt-4 border-t border-[#111111]/15 flex items-center justify-between font-mono text-xs font-bold text-[#111111] group-hover:text-[#245BDB] transition-colors">
               <span>READ ARCHITECTURE NOTE</span>
               <ArrowUpRight size={15} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
             </div>

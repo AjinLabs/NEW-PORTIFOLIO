@@ -1,10 +1,11 @@
 "use client";
 import React from "react";
-import { MapPin, Briefcase, GraduationCap, Award, Compass, CheckCircle2 } from "lucide-react";
+import { MapPin } from "lucide-react";
 
 const experienceList = [
   {
     period: "June 2025 – Present",
+    isCurrent: true,
     role: "Data Science Intern (Integrated Diploma Program)",
     company: "Techolas Technologies Pvt. Ltd., Kochi",
     description:
@@ -13,6 +14,7 @@ const experienceList = [
   },
   {
     period: "2024 – Present",
+    isCurrent: true,
     role: "Co-Founder, Freelance Web Development Studio",
     company: "Venm (with Akash Tomy & Ashish P S)",
     description:
@@ -21,6 +23,7 @@ const experienceList = [
   },
   {
     period: "Feb 2025 – March 2025",
+    isCurrent: false,
     role: "Python Intern — Recallio Healthcare",
     company: "RISS Technologies, Kochi",
     description:
@@ -29,6 +32,7 @@ const experienceList = [
   },
   {
     period: "April 2024 – May 2024",
+    isCurrent: false,
     role: "Python Full Stack Development Intern",
     company: "Byteboot Techno Solutions Pvt. Ltd.",
     description:
@@ -37,6 +41,7 @@ const experienceList = [
   },
   {
     period: "2022 – 2025",
+    isCurrent: false,
     role: "Bachelor of Computer Applications (BCA)",
     company: "Christ College Kattappana, Mahatma Gandhi University",
     description:
@@ -47,51 +52,51 @@ const experienceList = [
 
 export default function NowAndExperience() {
   return (
-    <section id="now" className="py-24 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto border-t-2 border-black/10">
-      {/* Green Marker and Headline */}
-      <div className="w-12 h-1.5 bg-[#ccff00] border border-black mb-4" />
+    <section id="now" className="py-24 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto border-t-2 border-[#111111]/15">
+      {/* Electric Blue Marker and Headline */}
+      <div className="w-12 h-1.5 bg-[#245BDB] border border-[#111111] mb-4" />
 
       {/* Now Section */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start mb-20">
         <div className="lg:col-span-5">
-          <h2 className="text-4xl sm:text-6xl font-display leading-[1.0] text-black mb-4">
+          <h2 className="text-4xl sm:text-6xl font-display leading-[1.0] text-[#111111] mb-4">
             <span className="font-light block">Now &amp;</span>
             <span className="font-black block">Active Focus</span>
           </h2>
-          <p className="font-sans text-base text-black/75 leading-relaxed">
+          <p className="font-sans text-base text-[#111111]/80 leading-relaxed">
             What I am actively spending my engineering hours on this month.
           </p>
         </div>
 
-        <div className="lg:col-span-7 bg-white border-2 border-black p-7 sm:p-9 shadow-[6px_6px_0px_#000] flex flex-col gap-6">
-          <div className="flex items-center gap-2 font-mono text-xs text-black/70">
-            <MapPin size={14} className="text-black" />
+        <div className="lg:col-span-7 bg-white border-2 border-[#111111] p-7 sm:p-9 shadow-[6px_6px_0px_#111111] flex flex-col gap-6">
+          <div className="flex items-center gap-2 font-mono text-xs text-[#111111]/75">
+            <MapPin size={14} className="text-[#245BDB]" />
             <span>Based in Nilambur, Kerala, India (UTC+5:30)</span>
           </div>
 
-          <div className="space-y-4 font-sans text-sm text-black/85 leading-relaxed">
+          <div className="space-y-4 font-sans text-sm text-[#111111]/85 leading-relaxed">
             <p>
-              <strong className="text-black font-bold">1. Techolas Technologies Diploma:</strong> Daily hands-on work with predictive statistical modeling, data cleaning, and executive dashboards across multi-thousand row real-world datasets in Python, SQL, and Power BI.
+              <strong className="text-[#111111] font-bold">1. Techolas Technologies Diploma:</strong> Daily hands-on work with predictive statistical modeling, data cleaning, and executive dashboards across multi-thousand row real-world datasets in Python, SQL, and Power BI.
             </p>
             <p>
-              <strong className="text-black font-bold">2. Venm Studio Deployments:</strong> Expanding client systems across LegalTech (Vakkeel &amp; Associates) and competitive exam education platforms (Indian Law School &amp; LMS) using AI-assisted vibe coding workflows in Claude Code and Google Antigravity.
+              <strong className="text-[#111111] font-bold">2. Venm Studio Deployments:</strong> Expanding client systems across LegalTech (Vakkeel &amp; Associates) and competitive exam education platforms (Indian Law School &amp; LMS) using AI-assisted vibe coding workflows in Claude Code and Google Antigravity.
             </p>
             <p>
-              <strong className="text-black font-bold">3. Career Transition:</strong> Actively preparing for and interviewing for full-time roles as a <strong className="text-black font-bold bg-[#ccff00] px-1">Machine Learning Engineer</strong> and <strong className="text-black font-bold bg-[#ccff00] px-1">Data Scientist</strong>.
+              <strong className="text-[#111111] font-bold">3. Career Transition:</strong> Actively preparing for and interviewing for full-time roles as a <strong className="text-[#17243A] font-bold bg-[#DBEAFE] border border-[#245BDB]/30 px-1.5 py-0.5">Machine Learning Engineer</strong> and <strong className="text-[#17243A] font-bold bg-[#DBEAFE] border border-[#245BDB]/30 px-1.5 py-0.5">Data Scientist</strong>.
             </p>
           </div>
         </div>
       </div>
 
       {/* Track Record & Experience */}
-      <div id="about" className="border-t-2 border-black/10 pt-16">
-        <div className="w-12 h-1.5 bg-[#ccff00] border border-black mb-4" />
+      <div id="about" className="border-t-2 border-[#111111]/15 pt-16">
+        <div className="w-12 h-1.5 bg-[#245BDB] border border-[#111111] mb-4" />
         <div className="max-w-3xl mb-12">
-          <h2 className="text-4xl sm:text-6xl font-display leading-[1.0] text-black mb-4">
+          <h2 className="text-4xl sm:text-6xl font-display leading-[1.0] text-[#111111] mb-4">
             <span className="font-light block">Track Record &amp;</span>
             <span className="font-black block">Credentials.</span>
           </h2>
-          <p className="font-sans text-base text-black/75 leading-relaxed">
+          <p className="font-sans text-base text-[#111111]/80 leading-relaxed">
             Verified internship experience, entrepreneurial delivery with Venm, and university education.
           </p>
         </div>
@@ -100,23 +105,29 @@ export default function NowAndExperience() {
           {experienceList.map((exp, idx) => (
             <div
               key={idx}
-              className="bg-white border-2 border-black p-6 sm:p-8 shadow-[5px_5px_0px_#000] flex flex-col md:flex-row md:items-start justify-between gap-6"
+              className="bg-white border-2 border-[#111111] p-6 sm:p-8 shadow-[5px_5px_0px_#111111] flex flex-col md:flex-row md:items-start justify-between gap-6 hover:shadow-[7px_7px_0px_#111111] transition-all"
             >
               <div className="flex-1 flex flex-col gap-2">
                 <div className="flex flex-wrap items-center gap-3">
-                  <span className="font-mono text-xs font-bold bg-[#ccff00] border border-black px-2.5 py-0.5">
+                  <span
+                    className={`font-mono text-xs font-bold border border-[#111111] px-2.5 py-0.5 ${
+                      exp.isCurrent
+                        ? "bg-[#245BDB] text-white shadow-[1px_1px_0px_#111111]"
+                        : "bg-[#DBEAFE] text-[#17243A]"
+                    }`}
+                  >
                     {exp.period}
                   </span>
-                  <span className="font-mono text-xs text-black/60 font-semibold">
+                  <span className="font-mono text-xs text-[#111111]/60 font-semibold">
                     {exp.company}
                   </span>
                 </div>
 
-                <h3 className="font-display font-black text-xl sm:text-2xl text-black mt-1">
+                <h3 className="font-display font-black text-xl sm:text-2xl text-[#111111] mt-1">
                   {exp.role}
                 </h3>
 
-                <p className="font-sans text-xs sm:text-sm text-black/80 leading-relaxed mt-1 max-w-3xl">
+                <p className="font-sans text-xs sm:text-sm text-[#111111]/80 leading-relaxed mt-1 max-w-3xl">
                   {exp.description}
                 </p>
               </div>
@@ -125,7 +136,7 @@ export default function NowAndExperience() {
                 {exp.skills.map((s) => (
                   <span
                     key={s}
-                    className="px-2.5 py-1 bg-[#f4f1ea] border border-black font-mono text-[10px] text-black font-semibold text-center"
+                    className="px-2.5 py-1 bg-[#F5F3EE] border border-[#111111] font-mono text-[10px] text-[#111111] font-semibold text-center hover:bg-[#DBEAFE] hover:text-[#17243A] transition-colors"
                   >
                     {s}
                   </span>

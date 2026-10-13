@@ -10,7 +10,7 @@ import ContactSection from "@/components/ContactSection";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#f4f1ea] text-[#0f0f0f]">
+    <main className="min-h-screen bg-[#F5F3EE] text-[#111111]">
       {/* Navigation with Ask AI Ajin Drawer */}
       <Navigation />
 
